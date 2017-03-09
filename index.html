@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="pokemonai">
+<head>
+	<title>AngularJS</title>
+
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+<body>
+
+	<h1>{{ "Pirma " + (15 + 5) + " eilutė!" }}</h1>
+
+	<div ng-controller="PokemonController as pokemonsCtrl">
+		<ul>
+			<li ng-repeat="pokemon in pokemonsCtrl.pokemons" ng-hide="{{pokemon.inStock}}">
+			<img ng-src="{{pokemon.img}}">
+
+			<ul class="gallery" ng-show="{{pokemon.images.length}}">
+				<li ng-repeat="image in pokemon.images">
+					<img ng-src="{{image}}">
+				</li>
+			</ul>
+
+			{{pokemon.name}} <br/>
+			{{pokemon.type}} <br/>
+			{{pokemon.price | currency:''}} €
+
+			<div ng-controller="TabController as tabCtrl">
+				<ul>
+					<li>
+						<a ng-click="tabCtrl.clicked(1)" href="">Tab1</a>
+					</li>
+					<li>
+						<a ng-click="tabCtrl.clicked(2)" href="">Tab2</a>
+					</li>
+					<li>
+						<a ng-click="tabCtrl.clicked(3)" href="">Tab3</a>
+					</li>
+				</ul>
+				<div>
+					<div ng-show="tabCtrl.display(1)">Textas 1</div>
+					<div ng-show="tabCtrl.display(2)">Textas 2</div>
+					<div ng-show="tabCtrl.display(3)">Textas 3</div>
+				</div>
+			</div>
+
+
+			<div ng-controller="FormController as formCtrl" class="form-wrapper">
+
+				<div>
+					<p><strong>{{inputs.name}}</strong><br/>
+					{{inputs.description}}<br/>
+					{{inputs.email}}<i></i></p>
+				</div>
+
+				<form novalidate>
+					<input ng-model="inputs.name" type="number" name="name" required>
+					<textarea ng-model="inputs.description" name="description"></textarea required>
+					<input ng-model="inputs.email" type="email" name="email" required>
+				</form>
+			</div>
+
+			</li>
+		</ul>
+	</div>
+
+</body>
+</html>
